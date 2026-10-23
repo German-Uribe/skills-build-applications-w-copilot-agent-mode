@@ -4,7 +4,10 @@ export async function listActivities() {
   return Activity.find().lean();
 }
 
-export async function createActivity(_input: unknown) {
+export async function createActivity(input: unknown) {
+  if (!input || typeof input !== 'object' || Array.isArray(input) || Object.keys(input).length === 0) {
+    throw Object.assign(new Error('Activity input is required'), { status: 400 });
+  }
   throw Object.assign(new Error('Activity validation is not implemented yet'), { status: 501 });
 }
 
